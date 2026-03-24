@@ -18,7 +18,6 @@ public partial class MainWindow : Window
                 noteWin.Owner = this;
                 noteWin.ShowDialog();
                 
-                // Обновляем индикацию заметок (красная рамка) после закрытия окна
                 vm.UpdateNotesIndicator();
             };
         }

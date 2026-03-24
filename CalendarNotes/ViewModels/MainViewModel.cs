@@ -39,14 +39,11 @@ namespace CalendarNotes.ViewModels
 
             var firstDay = new DateTime(_currentMonth.Year, _currentMonth.Month, 1);
             
-            // Определяем день недели для первого числа месяца
-            // DayOfWeek.Sunday = 0, поэтому сдвигаем так, чтобы ПН(1) был первым
             int startOffset = (int)firstDay.DayOfWeek - 1;
-            if (startOffset < 0) startOffset = 6; // Если воскресенье, сдвиг 6 дней назад
+            if (startOffset < 0) startOffset = 6; 
 
             var startDate = firstDay.AddDays(-startOffset);
             
-            // Календарь обычно имеет 6 строк по 7 дней
             for (int i = 0; i < 42; i++)
             {
                 var date = startDate.AddDays(i);

@@ -7,10 +7,8 @@ using System.Windows.Input;
 
 namespace TicTacToeMVVM
 {
-    // 1. Главная логика игры (ViewModel)
     public class MainViewModel : INotifyPropertyChanged
     {
-        // Список из 9 клеток игрового поля
         public ObservableCollection<CellVM> Board { get; set; }
 
         private string _statusMessage;
@@ -28,7 +26,6 @@ namespace TicTacToeMVVM
 
         public MainViewModel()
         {
-            // Инициализируем 9 пустых клеток
             Board = new ObservableCollection<CellVM>();
             for (int i = 0; i < 9; i++) Board.Add(new CellVM());
 
@@ -40,7 +37,6 @@ namespace TicTacToeMVVM
 
         private bool CanExecuteCellClick(object parameter)
         {
-            // Кнопку можно нажать, если игра не окончена и клетка пустая
             if (_gameOver) return false;
             if (parameter is CellVM cell) return string.IsNullOrEmpty(cell.Content);
             return false;
@@ -66,12 +62,11 @@ namespace TicTacToeMVVM
 
         private void CheckWin()
         {
-            // Индексы выигрышных комбинаций
             int[][] winLines = new int[][]
             {
-                new[] {0, 1, 2}, new[] {3, 4, 5}, new[] {6, 7, 8}, // Горизонтали
-                new[] {0, 3, 6}, new[] {1, 4, 7}, new[] {2, 5, 8}, // Вертикали
-                new[] {0, 4, 8}, new[] {2, 4, 6}                   // Диагонали
+                new[] {0, 1, 2}, new[] {3, 4, 5}, new[] {6, 7, 8}, 
+                new[] {0, 3, 6}, new[] {1, 4, 7}, new[] {2, 5, 8}, 
+                new[] {0, 4, 8}, new[] {2, 4, 6}                   
             };
 
             foreach (var line in winLines)
@@ -111,7 +106,6 @@ namespace TicTacToeMVVM
         }
     }
 
-    // 2. Модель отдельной клетки (View-Model клетки)
     public class CellVM : INotifyPropertyChanged
     {
         private string _content = "";
@@ -128,7 +122,6 @@ namespace TicTacToeMVVM
         }
     }
 
-    // 3. Класс для обработки нажатий кнопок (Команды MVVM)
     public class RelayCommand : ICommand
     {
         private readonly Action<object> _execute;
